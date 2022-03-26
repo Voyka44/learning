@@ -12,7 +12,7 @@ print('Обновление справочника БИК с сайта БР...'
 # url = requests.get('https://cbr.ru/s/newbik', timeout=15.001)
 # f.write(url.content)
 # f.close()
-z = zipfile.ZipFile(config['Path']['path_save'] + config['Name']['arch_name'])
+z = zipfile.ZipFile(config['Path']['save_path'] + config['Name']['arch_name'])
 
 # читаем содержимое файла
 z.printdir()
@@ -24,5 +24,12 @@ except:
     pass
 
 #TODO:добавить проверку каталога назначения
+
+
+
+#TODO:вывести переменную хоста в конфиг
+
+
+#TODO:вывести логирование процесса
 
 
