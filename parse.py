@@ -1,26 +1,28 @@
 import requests
 import zipfile
+import configparser
+
+config = configparser.ConfigParser()  # создаём объекта парсера
+config.read("parse.ini")  # читаем конфиг
+
 
 print('Обновление справочника БИК с сайта БР...')
-path_save = 'c:\\temp\\'
-dist_path = 'c:\\temp\\o'
-Arch_name = 'bik.zip'
 
 # f = open(path_save + Arch_name, "wb")
 # url = requests.get('https://cbr.ru/s/newbik', timeout=15.001)
 # f.write(url.content)
 # f.close()
-z = zipfile.ZipFile(path_save + Arch_name)
+z = zipfile.ZipFile(config['Path']['path_save'] + config['Name']['arch_name'])
 
 # читаем содержимое файла
 z.printdir()
 
 # извлекаем файл
 try:
-    z.extractall(dist_path)
+    z.extractall(config['Path']['dist_path'])
 except:
     pass
 
-
+#TODO:добавить проверку каталога назначения
 
 
