@@ -12,9 +12,11 @@ print('Обновление справочника БИК с сайта БР...'
 
 f = open(config['Path']['save_path'] + config['Name']['arch_name'], "wb")
 url = requests.get(config['Hosts']['host'], timeout=15.001)
-f.write(url.content)
-f.close()
-z = zipfile.ZipFile(config['Path']['save_path'] + config['Name']['arch_name'])
+if url.status_code == 200:
+    print('Все в норме...')
+    f.write(url.content)
+    f.close()
+    z = zipfile.ZipFile(config['Path']['save_path'] + config['Name']['arch_name'])
 
 # читаем содержимое файла
 z.printdir()
