@@ -11,7 +11,7 @@ config.read("parse.ini")  # читаем конфиг
 print('Обновление справочника БИК с сайта БР...')
 
 f = open(config['Path']['save_path'] + config['Name']['arch_name'], "wb")
-url = requests.get('https://cbr.ru/s/newbik', timeout=15.001)
+url = requests.get(config['Hosts']['host'], timeout=15.001)
 f.write(url.content)
 f.close()
 z = zipfile.ZipFile(config['Path']['save_path'] + config['Name']['arch_name'])
