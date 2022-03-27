@@ -10,16 +10,17 @@ config.read("parse.ini")  # читаем конфиг
 
 print('Обновление справочника БИК с сайта БР...')
 
-f = open(config['Path']['save_path'] + config['Name']['arch_name'], "wb")
+
 url = requests.get(config['Hosts']['host'], timeout=15.001)
 if url.status_code == 200:
     print('Все в норме...')
+    arch_name = url.headers['Content-Disposition'][-20:] # получаем имя архива
+    print('Получаем имя архива...' + arch_name)
+    f = open(config['Path']['save_path'] + arch_name, "wb")
     f.write(url.content)
     f.close()
     z = zipfile.ZipFile(config['Path']['save_path'] + config['Name']['arch_name'])
-
-# читаем содержимое файла
-z.printdir()
+    z.printdir() # читаем содержимое файла
 
 # извлекаем файл
 try:
